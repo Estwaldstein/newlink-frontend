@@ -41,7 +41,7 @@ const IntroducerDashboard = () => {
   const handleLogout = () => {
     setAuth({});
     localStorage.removeItem('auth');
-    navigate('/login');
+    navigate('/');
   };
 
   const handleChange = (e) => {
