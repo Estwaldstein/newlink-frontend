@@ -79,7 +79,7 @@ const CapitalPartnerDashboard = () => {
                     return (
                       <li key={index}>
                         <a
-                          href={`https://app.exchange.newlink-asia.com/uploads/${filename}`}
+                          href={`https://api.exchange.newlink-asia.com/uploads/${filename}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           download
