@@ -30,11 +30,14 @@ const Login = () => {
         return;
       }
 
-      setAuth({
+      const newAuth = {
         token: response.data.token,
         role: userRole,
-        user: response.data.id
-      });
+        id: response.data.id
+      };
+
+      setAuth(newAuth);
+      localStorage.setItem('auth', JSON.stringify(newAuth));
 
       switch (userRole) {
         case 'introducer':
