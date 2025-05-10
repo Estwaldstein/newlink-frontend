@@ -38,10 +38,10 @@ const AdminDashboard = () => {
   };
 
   const handleLogout = () => {
-    setAuth({});
-    localStorage.removeItem('auth');
-    navigate('/');
-  };
+  setAuth({});
+  localStorage.removeItem('auth');
+  window.location.href = '/';
+};
 
   useEffect(() => {
     fetchDeals();
