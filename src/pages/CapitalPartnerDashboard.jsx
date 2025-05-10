@@ -26,9 +26,10 @@ const CapitalPartnerDashboard = () => {
   }, [auth.token]);
 
   const handleLogout = () => {
-    setAuth({});
-    navigate('/');
-  };
+  setAuth({});
+  localStorage.removeItem('auth');
+  window.location.href = '/';
+};
 
   const expressInterest = async (dealId) => {
   try {
