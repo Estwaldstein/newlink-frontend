@@ -31,23 +31,25 @@ const CapitalPartnerDashboard = () => {
   };
 
   const expressInterest = async (dealId) => {
-    try {
-      await axios.post(`/deals/interest/${dealId}`, {}, {
-        headers: {
-          Authorization: `Bearer ${auth.token}`
-        }
-      });
+  try {
+    const res = await axios.post(`/deals/interest/${dealId}`, {}, {
+      headers: {
+        Authorization: `Bearer ${auth.token}`
+      }
+    });
+    console.log('✅ Express interest response:', res.data);
 
-      const refreshed = await axios.get('/deals/list', {
-        headers: {
-          Authorization: `Bearer ${auth.token}`
-        }
-      });
-      setDeals(refreshed.data);
-    } catch (err) {
-      console.error('❌ Failed to express interest:', err);
-    }
-  };
+    const refreshed = await axios.get('/deals/list', {
+      headers: {
+        Authorization: `Bearer ${auth.token}`
+      }
+    });
+    setDeals(refreshed.data);
+  } catch (err) {
+    console.error('❌ Failed to express interest:', err.response?.data || err.message);
+    alert(`Error: ${err.response?.data?.error || err.message}`);
+  }
+};
 
   return (
     <section>
