@@ -7,6 +7,7 @@ const IntroducerDashboard = () => {
   const { auth, setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
   const [deals, setDeals] = useState([]);
+  const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState('');
@@ -34,15 +35,27 @@ const IntroducerDashboard = () => {
     }
   };
 
+  const fetchNotifications = async () => {
+    try {
+      const response = await axios.get('/auth/me', {
+        headers: { Authorization: `Bearer ${auth.token}` },
+      });
+      setNotifications(response.data.notifications || []);
+    } catch (error) {
+      console.error('❌ Error fetching notifications:', error);
+    }
+  };
+
   useEffect(() => {
     fetchDeals();
+    fetchNotifications();
   }, []);
 
-const handleLogout = () => {
-  setAuth({});
-  localStorage.removeItem('auth');
-  window.location.href = '/';
-};
+  const handleLogout = () => {
+    setAuth({});
+    localStorage.removeItem('auth');
+    navigate('/');
+  };
 
   const handleChange = (e) => {
     if (e.target.name === 'documents') {
@@ -122,9 +135,9 @@ const handleLogout = () => {
               <option value="USD">USD</option>
               <option value="EUR">EUR</option>
               <option value="GBP">GBP</option>
-	      <option value="CHF">CHF</option>
-	      <option value="SGD">SGD</option>
-	      <option value="HKD">HKD</option>
+              <option value="CHF">CHF</option>
+              <option value="SGD">SGD</option>
+              <option value="HKD">HKD</option>
               <option value="JPY">JPY</option>
               <option value="AUD">AUD</option>
             </select>
@@ -149,7 +162,7 @@ const handleLogout = () => {
         {message && <p>{message}</p>}
       </div>
 
-      {/* Right: List of Previous Deals */}
+      {/* Right: Deals and Notifications */}
       <div style={{ flex: 1 }}>
         <h2>Your Submitted Deals</h2>
         {loading ? (
@@ -165,6 +178,20 @@ const handleLogout = () => {
                   <p><b>Deal Size:</b> {deal.currency} {Number(deal.value).toLocaleString()}</p>
                 )}
                 {deal.country && <p><b>Country:</b> {deal.country}</p>}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <h2 style={{ marginTop: '40px' }}>Notifications</h2>
+        {notifications.length === 0 ? (
+          <p>No notifications yet.</p>
+        ) : (
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            {notifications.map((note, index) => (
+              <li key={index} style={{ backgroundColor: '#f5f5f5', padding: '10px', marginBottom: '10px' }}>
+                <p>{note.content}</p>
+                <small>{new Date(note.timestamp).toLocaleString()}</small>
               </li>
             ))}
           </ul>
