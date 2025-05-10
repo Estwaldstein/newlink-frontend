@@ -38,11 +38,11 @@ const IntroducerDashboard = () => {
     fetchDeals();
   }, []);
 
-  const handleLogout = () => {
-    setAuth({});
-    localStorage.removeItem('auth');
-    navigate('/');
-  };
+const handleLogout = () => {
+  setAuth({});
+  localStorage.removeItem('auth');
+  window.location.href = '/';
+};
 
   const handleChange = (e) => {
     if (e.target.name === 'documents') {
