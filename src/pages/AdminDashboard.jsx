@@ -40,7 +40,7 @@ const AdminDashboard = () => {
   const handleLogout = () => {
     setAuth({});
     localStorage.removeItem('auth');
-    navigate('/login');
+    navigate('/');
   };
 
   useEffect(() => {
