@@ -106,14 +106,54 @@ const IntroducerDashboard = () => {
   };
 
   return (
-    <section style={{ display: 'flex', flexDirection: 'row', padding: '20px' }}>
+    <section style={{ display: 'flex', padding: '20px' }}>
       {/* Left: Submission Form */}
-      <div style={{ flex: 1, marginRight: '40px' }}>
+      <div style={{ flex: 1, paddingRight: '40px' }}>
         <h1>Introducer Dashboard</h1>
         <h2>Submit a New Deal</h2>
         <form onSubmit={handleSubmit} encType="multipart/form-data">
-          {/* form fields here (same as before) */}
-          {/* ... */}
+          <label>Title:<br />
+            <input type="text" name="title" value={formData.title} onChange={handleChange} required />
+          </label><br /><br />
+
+          <label>Description:<br />
+            <textarea name="description" value={formData.description} onChange={handleChange} required />
+          </label><br /><br />
+
+          <label>Sector:<br />
+            <select name="sector" value={formData.sector} onChange={handleChange}>
+              <option value="private_equity">Private Equity</option>
+              <option value="wealth_management">Wealth Management</option>
+              <option value="real_estate">Real Estate</option>
+            </select>
+          </label><br /><br />
+
+          <label>Currency (optional):<br />
+            <select name="currency" value={formData.currency} onChange={handleChange}>
+              <option value="">-- Select Currency --</option>
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+              <option value="CHF">CHF</option>
+              <option value="SGD">SGD</option>
+              <option value="HKD">HKD</option>
+              <option value="JPY">JPY</option>
+              <option value="AUD">AUD</option>
+            </select>
+          </label><br /><br />
+
+          <label>Value (optional):<br />
+            <input type="number" step="0.01" name="value" value={formData.value} onChange={handleChange} />
+          </label><br /><br />
+
+          <label>Country (optional):<br />
+            <input type="text" name="country" value={formData.country} onChange={handleChange} />
+          </label><br /><br />
+
+          <label>Upload Document (optional):<br />
+            <input type="file" name="documents" onChange={handleChange} />
+          </label><br /><br />
+
           <button type="submit" disabled={submitting}>
             {submitting ? 'Submitting...' : 'Submit Deal'}
           </button>
@@ -121,7 +161,7 @@ const IntroducerDashboard = () => {
         {message && <p>{message}</p>}
       </div>
 
-      {/* Right: Notifications and Submitted Deals */}
+      {/* Right: Notifications and Deals */}
       <div style={{ flex: 1 }}>
         <h2>Notifications</h2>
         {notifications.length === 0 ? (
@@ -130,8 +170,7 @@ const IntroducerDashboard = () => {
           <ul style={{ listStyle: 'none', padding: 0 }}>
             {notifications.map((note, index) => (
               <li key={index} style={{ border: '1px solid #bbb', padding: '10px', marginBottom: '10px', backgroundColor: '#f9f9f9' }}>
-                {note.content}
-                <br />
+                {note.content}<br />
                 <small>{new Date(note.timestamp).toLocaleString()}</small>
               </li>
             ))}
