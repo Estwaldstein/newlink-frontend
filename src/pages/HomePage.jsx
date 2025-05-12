@@ -97,7 +97,7 @@ const HomePage = () => {
 
       {/* Footer */}
       <footer className="footer" id="contact">
-        <p>© 2025 Newlink Exchange. All rights reserved.</p>
+        <p>© 2025 Newlink Asia Limited. All rights reserved.</p>
       </footer>
     </div>
   );
