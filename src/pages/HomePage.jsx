@@ -17,7 +17,7 @@ const HomePage = () => {
               <li><Link to="/login">Dashboard</Link></li>
             </ul>
           </nav>
-         /* <div className="contact-email">📧 info@newlink-asia.com</div> */
+         <div className="contact-email">📧 info@newlink-asia.com</div>
         </div>
       </header>
 
