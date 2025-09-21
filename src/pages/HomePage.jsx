@@ -8,7 +8,10 @@ const HomePage = () => {
       {/* Header Navigation */}
       <header className="header">
         <div className="main-container header-inner">
-          <div className="logo">Newlink Exchange</div>
+          <div className="logo">
+            <span>Newlink Exchange</span>
+            <span className="swiss-badge">🇨🇭 Switzerland</span>
+          </div>
           <nav>
             <ul className="nav-links">
               <li><a href="#channels">Channels</a></li>
@@ -17,7 +20,7 @@ const HomePage = () => {
               <li><Link to="/login">Dashboard</Link></li>
             </ul>
           </nav>
-         <div className="contact-email">📧 info@newlink-asia.com</div>
+          <div className="contact-email">📧 info@swiss-starter.com</div>
         </div>
       </header>
 
@@ -25,10 +28,11 @@ const HomePage = () => {
       <section className="header-section">
         <div className="main-container">
           <div className="header-content">
-            <h1 className="section-title">Exchange Channels</h1>
-            <h3 className="section-subtitle">Empowering Introducers and Capital Partners</h3>
+            <h1 className="section-title">Swiss Exchange Channels</h1>
+            <h3 className="section-subtitle">Connecting Introducers and Swiss Capital Partners</h3>
             <p className="section-description">
-              Newlink Exchange connects introducers with financial partners seamlessly. Experience secure messaging, a deal room, and compliance-focused features all in one platform.
+              Based in Switzerland, Newlink Exchange helps introducers work with capital partners through
+              secure messaging, a deal room, and compliance-focused workflows—together in one platform.
             </p>
           </div>
         </div>
@@ -62,9 +66,10 @@ const HomePage = () => {
       <section className="section alt" id="connect">
         <div className="main-container">
           <h2 className="section-title blue">Connect and thrive</h2>
-          <h3 className="section-subtitle">Empowering business introducers</h3>
+          <h3 className="section-subtitle">Empowering Swiss business introducers</h3>
           <p className="section-description">
-            Seamlessly connect with industry leaders and expand your reach. Our platform empowers business introducers to thrive in private equity, wealth management, and real estate.
+            Seamlessly connect with industry leaders and expand your reach across Switzerland and beyond.
+            Our platform empowers business introducers to thrive in private equity, wealth management, and real estate.
           </p>
           <div className="card-row">
             <div className="card round">
@@ -97,7 +102,10 @@ const HomePage = () => {
 
       {/* Footer */}
       <footer className="footer" id="contact">
-        <p>© 2025 Newlink Asia Limited. All rights reserved.</p>
+        <div className="main-container">
+          <p>© 2025 Newlink Switzerland AG. All rights reserved.</p>
+          <p className="footer-note">Operating from Switzerland</p>
+        </div>
       </footer>
     </div>
   );
