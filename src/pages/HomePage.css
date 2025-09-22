@@ -1,6 +1,6 @@
 /* ──────────────────────────────────────────────────────────
    Newlink Exchange (Switzerland) — HomePage.css
-   Single, Swiss-focused stylesheet (no HK fallbacks)
+   Swiss-focused stylesheet with expandable cards
    ────────────────────────────────────────────────────────── */
 
 /* Base / Reset */
@@ -29,17 +29,14 @@ html, body {
   --ink: #111;
   --muted: #444;
   --card: #ffffff;
+  --surface: #f8f9fa;
   --border: #e5e7eb;
   --shadow: 0 10px 24px rgba(16,24,40,0.06);
   --radius: 12px;
 }
 
 /* App Root centering */
-#root {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
+#root { display: flex; justify-content: center; width: 100%; }
 
 /* Layout container */
 .main-container {
@@ -56,7 +53,6 @@ html, body {
   background: #fff;
   border-bottom: 1px solid var(--border);
 }
-
 .header .header-inner {
   display: flex;
   align-items: center;
@@ -93,21 +89,14 @@ html, body {
   padding: 0;
   margin: 0;
 }
-
 .nav-links a {
   text-decoration: none;
   color: #1e40af;
   font-weight: 600;
 }
+.nav-links a:hover { text-decoration: underline; }
 
-.nav-links a:hover {
-  text-decoration: underline;
-}
-
-.contact-email {
-  font-size: .9rem;
-  color: #333;
-}
+.contact-email { font-size: .9rem; color: #333; }
 
 /* Hero (Swiss) — single rule */
 .header-section {
@@ -144,13 +133,13 @@ html, body {
   margin: 0 0 .5rem;
   font-weight: 800;
 }
+.section-title.blue { color: var(--brand); } /* optional accent */
 
 .section-subtitle {
   font-size: clamp(1.1rem, 1.2vw + .9rem, 1.4rem);
   margin: 0 0 1rem;
   font-weight: 600;
 }
-
 .section-description {
   max-width: 760px;
   margin: 0 auto;
@@ -161,11 +150,7 @@ html, body {
 
 /* Sections */
 .section { padding: 2rem 0; }
-.section.alt {
-  padding: 4rem 0;
-  background: #f0f4f8;
-  color: var(--ink);
-}
+.section.alt { padding: 4rem 0; background: #f0f4f8; color: var(--ink); }
 
 /* Cards — responsive grid */
 .card-row {
@@ -174,13 +159,8 @@ html, body {
   gap: 2rem;
   padding: 2rem 0;
 }
-
-@media (max-width: 1024px) {
-  .card-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 640px) {
-  .card-row { grid-template-columns: 1fr; }
-}
+@media (max-width: 1024px) { .card-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px)  { .card-row { grid-template-columns: 1fr; } }
 
 .card {
   background: var(--card);
@@ -192,12 +172,10 @@ html, body {
   color: var(--ink);
   transition: transform .18s ease, box-shadow .18s ease;
 }
-
 .card:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 32px rgba(16,24,40,0.08);
 }
-
 .card img {
   display: block;
   width: 100%;
@@ -206,16 +184,26 @@ html, body {
   border-radius: 8px;
   margin-bottom: 1rem;
 }
+.card h4 { margin: .25rem 0 .5rem; font-size: 1.15rem; }
+.card p  { margin: 0; color: var(--muted); font-size: .95rem; }
 
-.card h4 {
-  margin: .25rem 0 .5rem;
-  font-size: 1.15rem;
+/* Expandable card body for "Read more" sections */
+.card-more {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 240ms ease;
+  text-align: left;
+  margin-top: .75rem;
 }
-
-.card p {
-  margin: 0;
+.card-more.open { max-height: 640px; } /* large enough for our longest copy */
+.card-more p { margin: .5rem 0; color: var(--ink); }
+.card-more ul {
+  margin: .5rem 0 0 1.1rem;
+  padding: 0;
+}
+.card-more li {
+  margin: .25rem 0;
   color: var(--muted);
-  font-size: .95rem;
 }
 
 /* Round avatar cards in “Connect and thrive” */
@@ -245,10 +233,8 @@ html, body {
   color: #fff;
   transition: background-color .2s ease, transform .05s ease;
 }
-
 .button:hover,
 .card button:hover { background: var(--brand-dark); }
-
 .button:active,
 .card button:active { transform: translateY(1px); }
 
@@ -269,7 +255,6 @@ button:focus-visible {
   padding: 1.2rem 1rem;
   font-size: .92rem;
 }
-
 .footer-note {
   display: block;
   opacity: .85;
@@ -293,10 +278,7 @@ button:focus-visible {
   }
   .card p { color: #cbd5e1; }
 
-  .button, .card button {
-    background: var(--brand);
-    color: #fff;
-  }
+  .button, .card button { background: var(--brand); color: #fff; }
   .button:hover, .card button:hover { background: var(--brand-dark); }
 
   .footer { background: #0b1220; color: #cbd5e1; }
