@@ -28,7 +28,7 @@ const HomePage = () => {
       </header>
 
       {/* Hero Section (image is set in CSS as /images/hero-ch.jpg) */}
-      <section className="header-section">
+      <section className="header-section header-section--swiss">
         <div className="main-container">
           <div className="header-content">
             <h1 className="section-title">Exchange Channels</h1>
