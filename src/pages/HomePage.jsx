@@ -31,6 +31,8 @@ function ExpandableCard({ img, title, teaser, children }) {
 }
 
 const HomePage = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <div>
       {/* Header Navigation */}
@@ -41,7 +43,8 @@ const HomePage = () => {
             <span className="swiss-badge">🇨🇭 Switzerland</span>
           </div>
 
-          <nav>
+          {/* Desktop nav */}
+          <nav className="nav-desktop">
             <ul className="nav-links">
               <li><a href="#channels">Channels</a></li>
               <li><a href="#connect">Connect</a></li>
@@ -50,7 +53,25 @@ const HomePage = () => {
             </ul>
           </nav>
 
-          <div className="contact-email">📧 info@swiss-starter.ch</div>
+          {/* Mobile menu button */}
+          <button
+            className="menu-toggle"
+            aria-label="Toggle navigation"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen(o => !o)}
+          >
+            <span className="menu-bar" />
+            <span className="menu-bar" />
+            <span className="menu-bar" />
+          </button>
+        </div>
+
+        {/* Mobile drawer */}
+        <div className={`nav-drawer ${menuOpen ? 'open' : ''}`}>
+          <a href="#channels" onClick={() => setMenuOpen(false)}>Channels</a>
+          <a href="#connect" onClick={() => setMenuOpen(false)}>Connect</a>
+          <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+          <Link to="/login" onClick={() => setMenuOpen(false)}>Dashboard</Link>
         </div>
       </header>
 
