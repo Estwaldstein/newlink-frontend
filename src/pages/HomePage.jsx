@@ -1,7 +1,34 @@
 // src/pages/HomePage.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import './HomePage.css';
 import { Link } from 'react-router-dom';
+
+/** Small helper: a card with a "Read more" toggle */
+function ExpandableCard({ img, title, teaser, children }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="card">
+      <img src={img} alt={title} />
+      <h4>{title}</h4>
+      <p>{teaser}</p>
+      <button
+        className="button"
+        onClick={() => setOpen(o => !o)}
+        aria-expanded={open}
+        aria-controls={`${title.replace(/\s+/g, '-').toLowerCase()}-more`}
+      >
+        {open ? 'Hide details' : 'Read more'}
+      </button>
+
+      <div
+        id={`${title.replace(/\s+/g, '-').toLowerCase()}-more`}
+        className={`card-more ${open ? 'open' : ''}`}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
 
 const HomePage = () => {
   return (
@@ -27,8 +54,8 @@ const HomePage = () => {
         </div>
       </header>
 
-      {/* Hero Section (image is set in CSS as /images/hero-ch.jpg) */}
-      <section className="header-section header-section--swiss">
+      {/* Hero Section (image set in CSS as /images/hero-ch.jpg) */}
+      <section className="header-section">
         <div className="main-container">
           <div className="header-content">
             <h1 className="section-title">Exchange Channels</h1>
@@ -47,26 +74,61 @@ const HomePage = () => {
       {/* Channels Section */}
       <section className="section" id="channels">
         <div className="main-container card-row">
-          <div className="card">
-            <img src="/images/real-estate.jpeg" alt="Real Estate" />
-            <h4>Real Estate</h4>
-            <p>Institutional property and development capital</p>
-            <button className="button">Read more</button>
-          </div>
+          {/* Real Estate */}
+          <ExpandableCard
+            img="/images/real-estate.jpeg"
+            title="Real Estate"
+            teaser="Institutional property and development capital"
+          >
+            <p>
+              <strong>Prime assets. Discreet placements.</strong> We introduce
+              <strong> owners and developers</strong> of core/core-plus
+              <strong> residential & commercial</strong> assets to qualified
+              <strong> family offices</strong> and cross-border buyers.
+            </p>
+            <ul>
+              <li><strong>Scope:</strong> Switzerland & EU; income-producing assets, development finance, off-market mandates.</li>
+              <li><strong>Process:</strong> NDA, structured teaser, curated outreach, data room, term negotiation.</li>
+              <li><strong>Outcome:</strong> verified interest, comparable guidance, coordinated diligence through closing.</li>
+            </ul>
+          </ExpandableCard>
 
-          <div className="card">
-            <img src="/images/private-equity.png" alt="Private Equity" />
-            <h4>Private Equity</h4>
-            <p>Growth capital, succession, and buyout opportunities</p>
-            <button className="button">Read more</button>
-          </div>
+          {/* Private Equity */}
+          <ExpandableCard
+            img="/images/private-equity.png"
+            title="Private Equity"
+            teaser="Growth capital, buyout & succession"
+          >
+            <p>
+              <strong>Growth, buyout & succession capital.</strong> We match
+              <strong> startups and SMEs</strong> with <strong>VC, PE and private investors</strong>
+              for minority or majority deals.
+            </p>
+            <ul>
+              <li><strong>Instruments:</strong> equity, convertible, growth capital, MBO/MBI, carve-outs, roll-ups.</li>
+              <li><strong>Process:</strong> screening, concise teaser, investor fit, introduction, data room, diligence.</li>
+              <li><strong>Focus:</strong> sector-led outreach with clear governance and execution timelines.</li>
+            </ul>
+          </ExpandableCard>
 
-          <div className="card">
-            <img src="/images/wealth.jpeg" alt="Wealth Management" />
-            <h4>Wealth Management</h4>
-            <p>Stay compliant effortlessly with our management system</p>
-            <button className="button">Read more</button>
-          </div>
+          {/* Wealth Management */}
+          <ExpandableCard
+            img="/images/wealth.jpeg"
+            title="Wealth Management"
+            teaser="Private offices & institutional discipline"
+          >
+            <p>
+              <strong>Private offices & institutional discipline.</strong> We introduce
+              <strong> HNW individuals and companies</strong> to Swiss
+              <strong> private offices and asset managers</strong> for discretionary portfolios
+              and treasury solutions.
+            </p>
+            <ul>
+              <li><strong>Solutions:</strong> multi-asset mandates, liquidity management, alternatives, custody in Switzerland.</li>
+              <li><strong>Compliance:</strong> suitability, KYC/AML and cross-border rules built into the process.</li>
+              <li><strong>Flow:</strong> discovery → curated shortlist → introductions → onboarding with your chosen manager.</li>
+            </ul>
+          </ExpandableCard>
         </div>
       </section>
 
