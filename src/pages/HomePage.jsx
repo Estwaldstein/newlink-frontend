@@ -50,7 +50,7 @@ const HomePage = () => {
             </ul>
           </nav>
 
-          <div className="contact-email">📧 info@newlink-asia.com</div>
+          <div className="contact-email">📧 info@swiss-starter.ch</div>
         </div>
       </header>
 
