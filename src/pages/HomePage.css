@@ -1,6 +1,6 @@
 /* ──────────────────────────────────────────────────────────
    Newlink Exchange (Switzerland) — HomePage.css
-   Swiss-focused stylesheet with expandable cards
+   Swiss-focused stylesheet with expandable cards + mobile nav
    ────────────────────────────────────────────────────────── */
 
 /* Base / Reset */
@@ -48,8 +48,9 @@ html, body {
 
 /* Header */
 .header {
-  position: relative;
-  z-index: 10;
+  position: sticky;    /* keep header visible while scrolling on mobile too */
+  top: 0;
+  z-index: 1000;
   background: #fff;
   border-bottom: 1px solid var(--border);
 }
@@ -82,7 +83,8 @@ html, body {
   line-height: 1;
 }
 
-.nav-links {
+/* Desktop nav */
+.nav-desktop .nav-links {
   display: flex;
   gap: 1.5rem;
   list-style: none;
@@ -261,7 +263,105 @@ button:focus-visible {
   margin-top: .25rem;
 }
 
-/* Dark Mode */
+/* ───────────────── Mobile Navigation ───────────────── */
+
+/* Hamburger button (smaller & crisper) */
+.menu-toggle {
+  display: none;                     /* visible via media queries */
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 8px;
+  background: #fff;
+  padding: 0;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease;
+}
+.menu-toggle:hover { background: #f6f7f9; }
+.menu-toggle:active { background: #eef0f3; }
+
+.menu-toggle .menu-bar {
+  display: block;
+  width: 18px;                       /* thinner bars */
+  height: 2px;
+  background: #111;
+  border-radius: 2px;
+  position: relative;
+}
+.menu-toggle .menu-bar::before,
+.menu-toggle .menu-bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  background: #111;
+  border-radius: 2px;
+}
+.menu-toggle .menu-bar::before { top: -6px; }  /* tight spacing */
+.menu-toggle .menu-bar::after  { top:  6px; }
+
+/* Drawer container (collapsed by default) */
+.nav-drawer {
+  display: none;                     /* becomes block on small screens */
+}
+
+/* Show hamburger + drawer behaviour on narrow widths */
+@media (max-width: 820px) {
+  .nav-desktop { display: none !important; }
+  .menu-toggle { display: inline-flex; }
+  .contact-email { display: none; }
+
+  .nav-drawer {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .25s ease;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-drawer.open { max-height: 280px; }
+
+  .nav-drawer a {
+    display: block;
+    padding: .95rem 1rem;
+    color: #111;
+    text-decoration: none;
+    border-top: 1px solid var(--border);
+  }
+  .nav-drawer a:hover { background: #f7f8fb; }
+}
+
+/* Force hamburger in short, landscape viewports (e.g., iPhone landscape) */
+@media (max-height: 480px) and (orientation: landscape) {
+  .nav-desktop { display: none !important; }
+  .menu-toggle { display: inline-flex !important; }
+  .contact-email { display: none !important; }
+
+  .nav-drawer {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .25s ease;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-drawer.open { max-height: 240px; }
+}
+
+/* ───────────────── Mobile readability tweaks ───────────────── */
+@media (max-width: 640px) {
+  .header-section { padding: 3.25rem 1rem; min-height: 360px; }
+  .header-content { padding: 2.25rem 1.1rem; }
+  .section-title { font-size: clamp(1.6rem, 6vw, 2.1rem); }
+  .section-subtitle { font-size: clamp(1rem, 3.5vw, 1.2rem); }
+  .card img { height: 150px; }
+  .button, .card button { width: 100%; }
+}
+
+/* ───────────────── Dark Mode ───────────────── */
 @media (prefers-color-scheme: dark) {
   html, body { background: #0b0b0b; color: #e5e7eb; }
   .header { background: #121212; border-bottom: 1px solid #1f2937; }
@@ -282,137 +382,4 @@ button:focus-visible {
   .button:hover, .card button:hover { background: var(--brand-dark); }
 
   .footer { background: #0b1220; color: #cbd5e1; }
-}
-
-/* Small screens: tidy header nav */
-@media (max-width: 820px) {
-  .header .header-inner { gap: 1rem; }
-  .nav-links { gap: 1rem; }
-  .contact-email { display: none; }
-}
-
-/* Mobile nav: button + drawer */
-.menu-toggle {
-  display: none;
-  background: transparent;
-  border: 0;
-  padding: .4rem .3rem;
-  cursor: pointer;
-}
-.menu-toggle .menu-bar {
-  display: block;
-  width: 24px;
-  height: 2px;
-  background: #111;
-  margin: 5px 0;
-  border-radius: 2px;
-}
-
-/* hide desktop nav on small screens */
-@media (max-width: 820px) {
-  .nav-desktop { display: none; }
-  .menu-toggle { display: inline-flex; }
-}
-
-/* drawer */
-.nav-drawer {
-  display: none;
-}
-@media (max-width: 820px) {
-  .nav-drawer {
-    display: block;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height .25s ease;
-    background: #fff;
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-drawer.open {
-    max-height: 280px;
-  }
-  .nav-drawer a {
-    display: block;
-    padding: .9rem 1rem;
-    color: #111;
-    text-decoration: none;
-    border-top: 1px solid var(--border);
-  }
-  .nav-drawer a:hover { background: #f8f9fb; }
-}
-
-/* Mobile readability tweaks */
-@media (max-width: 640px) {
-  .header-section { padding: 3.5rem 1rem; min-height: 360px; }
-  .header-content { padding: 2.5rem 1.25rem; }
-  .section-title { font-size: clamp(1.6rem, 6vw, 2.1rem); }
-  .section-subtitle { font-size: clamp(1rem, 3.5vw, 1.2rem); }
-
-   /* --- Mobile nav fix --- */
-.header {
-  position: sticky;   /* keeps header visible while scrolling */
-  top: 0;
-  background: #fff;
-  z-index: 1000;
-}
-
-/* Hide desktop nav on small screens, show hamburger */
-@media (max-width: 820px) {
-  .nav-desktop { display: none !important; }
-
-  .menu-toggle {
-    display: inline-flex !important;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    background: transparent;
-    border: 0;
-    padding: .5rem .4rem;
-    margin-left: auto;          /* pushes it to the right */
-    cursor: pointer;
-    z-index: 1001;              /* above drawer/hero */
-  }
-  .menu-toggle .menu-bar {
-    width: 26px;
-    height: 2px;
-    background: #111;           /* visible on white header */
-    border-radius: 2px;
-  }
-
-  /* Drawer is collapsed by default… */
-  .nav-drawer {
-    display: block;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height .25s ease;
-    background: #fff;
-    border-bottom: 1px solid var(--border);
-  }
-  /* …and opens when we add .open */
-  .nav-drawer.open {
-    max-height: 280px;
-  }
-
-  .nav-drawer a {
-    display: block;
-    padding: .95rem 1rem;
-    color: #111;
-    text-decoration: none;
-    border-top: 1px solid var(--border);
-  }
-  .nav-drawer a:hover {
-    background: #f7f8fb;
-  }
-
-  /* Optional: hide the email on tight screens */
-  .contact-email { display: none; }
-}
-
-/* Tighter mobile spacing for hero/buttons */
-@media (max-width: 640px) {
-  .header-section { padding: 3.25rem 1rem; min-height: 360px; }
-  .header-content { padding: 2.25rem 1.1rem; }
-  .button, .card button { width: 100%; }
-}
-  .card img { height: 150px; }
-  .button, .card button { width: 100%; }
 }
