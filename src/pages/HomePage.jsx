@@ -13,7 +13,7 @@ function ExpandableCard({ img, title, teaser, children }) {
       <p>{teaser}</p>
       <button
         className="button"
-        onClick={() => setOpen(o => !o)}
+        onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-controls={`${title.replace(/\s+/g, '-').toLowerCase()}-more`}
       >
@@ -38,27 +38,32 @@ const HomePage = () => {
       {/* Header Navigation */}
       <header className="header">
         <div className="main-container header-inner">
+          {/* Left: Logo */}
           <div className="logo">
             <span>Newlink Exchange</span>
             <span className="swiss-badge">🇨🇭 Switzerland</span>
           </div>
 
-          {/* Desktop nav */}
-           <nav className="nav-desktop">
+          {/* Center: Desktop nav (centered via CSS) */}
+          <nav className="nav-desktop">
             <ul className="nav-links">
               <li><a href="#channels">Channels</a></li>
               <li><a href="#connect">Connect</a></li>
               <li><a href="#contact">Contact</a></li>
+              {/* Dashboard temporarily routes to Connect */}
               <li><a href="#connect">Dashboard</a></li>
             </ul>
           </nav>
+
+          {/* Right: Contact email (hidden on small screens) */}
+          <div className="contact-email">📧 info@swiss-starter.ch</div>
 
           {/* Mobile menu button */}
           <button
             className="menu-toggle"
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
-            onClick={() => setMenuOpen(o => !o)}
+            onClick={() => setMenuOpen((o) => !o)}
           >
             <span className="menu-bar" />
             <span className="menu-bar" />
@@ -71,7 +76,8 @@ const HomePage = () => {
           <a href="#channels" onClick={() => setMenuOpen(false)}>Channels</a>
           <a href="#connect" onClick={() => setMenuOpen(false)}>Connect</a>
           <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
-          <Link to="/login" onClick={() => setMenuOpen(false)}>Dashboard</Link>
+          {/* Dashboard → Connect on mobile too */}
+          <a href="#connect" onClick={() => setMenuOpen(false)}>Dashboard</a>
         </div>
       </header>
 
