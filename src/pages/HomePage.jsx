@@ -44,12 +44,12 @@ const HomePage = () => {
           </div>
 
           {/* Desktop nav */}
-          <nav>
+           <nav className="nav-desktop">
             <ul className="nav-links">
               <li><a href="#channels">Channels</a></li>
               <li><a href="#connect">Connect</a></li>
               <li><a href="#contact">Contact</a></li>
-              <li><a href="#connect">Dashboard</a></li> {/* updated */}
+              <li><a href="#connect">Dashboard</a></li>
             </ul>
           </nav>
 
