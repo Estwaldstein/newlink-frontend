@@ -191,8 +191,8 @@ const HomePage = () => {
 
       {/* Footer */}
       <footer className="footer" id="contact">
-        <p>© 2025 Newlink. All rights reserved.</p>
-        <p className="footer-note">Operations hub: Switzerland</p>
+        <p>© 2025 Swiss Starter. All rights reserved.</p>
+        <p className="footer-note">Operations hub: Switzerland info@swiss-starter.ch</p>
       </footer>
     </div>
   );
