@@ -86,17 +86,24 @@ html, body {
   line-height: 1;
 }
 
-/* Center the nav block on desktop */
-.nav-desktop { justify-self: center; }
-
-/* Desktop nav links */
-.nav-desktop .nav-links {
-  display: flex;
-  gap: 1.5rem;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* Center the nav block on desktop (middle grid column) */
+.nav-desktop {
+  grid-column: 2;
+  justify-self: center;
 }
+
+/* Desktop nav links — force horizontal row & remove bullets */
+.nav-desktop .nav-links,
+.nav-links {
+  display: flex !important;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.nav-links li { list-style: none !important; }
+
 .nav-links a {
   text-decoration: none;
   color: #1e40af;
