@@ -58,7 +58,7 @@ html, body {
 /* Desktop: 3-column grid → logo | nav (center) | email (right) */
 .header .header-inner {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr auto 1fr; /* left | center | right */
   align-items: center;
   gap: 1rem;
   padding: 1rem 0;
@@ -283,7 +283,7 @@ button:focus-visible {
 
 /* ───────────────── Mobile Navigation ───────────────── */
 
-/* Hamburger button (smaller & crisper) */
+/* Hamburger button (smaller & right-aligned) */
 .menu-toggle {
   display: none;                     /* visible via media queries */
   align-items: center;
@@ -302,7 +302,7 @@ button:focus-visible {
 
 .menu-toggle .menu-bar {
   display: block;
-  width: 18px;                       /* thinner bars */
+  width: 18px;                       /* default */
   height: 2px;
   background: #111;
   border-radius: 2px;
@@ -322,14 +322,38 @@ button:focus-visible {
 .menu-toggle .menu-bar::after  { top:  6px; }
 
 /* Drawer container (collapsed by default) */
-.nav-drawer {
-  display: none;                     /* becomes block on small screens */
-}
+.nav-drawer { display: none; }
 
 /* Show hamburger + drawer behaviour on narrow widths */
 @media (max-width: 820px) {
   .nav-desktop { display: none !important; }
-  .menu-toggle { display: inline-flex; }
+
+  /* right-align the smaller hamburger in the 3rd grid column */
+  .menu-toggle {
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    justify-self: end;   /* pushes the button to the far right */
+    margin-left: auto;
+  }
+
+  .menu-toggle .menu-bar {
+    width: 16px;
+    height: 2px;
+  }
+  .menu-toggle .menu-bar::before,
+  .menu-toggle .menu-bar::after {
+    width: 16px;
+    height: 2px;
+  }
+  .menu-toggle .menu-bar::before { top: -5px; }
+  .menu-toggle .menu-bar::after  { top:  5px; }
+
+  /* optionally trim logo/badge a touch on mobile */
+  .logo { font-size: 1.05rem; gap: .4rem; }
+  .swiss-badge { padding: .14rem .44rem; font-size: .72rem; }
+
   .contact-email { display: none; }
 
   .nav-drawer {
@@ -355,7 +379,12 @@ button:focus-visible {
 /* Force hamburger in short, landscape viewports (e.g., iPhone landscape) */
 @media (max-height: 480px) and (orientation: landscape) {
   .nav-desktop { display: none !important; }
-  .menu-toggle { display: inline-flex !important; }
+  .menu-toggle { display: inline-flex !important; width: 26px; height: 26px; }
+  .menu-toggle .menu-bar,
+  .menu-toggle .menu-bar::before,
+  .menu-toggle .menu-bar::after { width: 14px; }
+  .menu-toggle .menu-bar::before { top: -4px; }
+  .menu-toggle .menu-bar::after  { top:  4px; }
   .contact-email { display: none !important; }
 
   .nav-drawer {
