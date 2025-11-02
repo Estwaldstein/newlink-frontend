@@ -439,3 +439,45 @@ button:focus-visible {
 
   .footer { background: #0b1220; color: #cbd5e1; }
 }
+/* ───────────────── Floating WhatsApp Button ───────────────── */
+.whatsapp-float {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  background-color: #25D366;
+  border-radius: 50%;
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  z-index: 1200;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.07);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+  background-color: #1ebe5d;
+}
+
+.whatsapp-icon {
+  width: 28px;
+  height: 28px;
+  filter: brightness(0) invert(1);
+}
+
+/* Make slightly smaller on mobile */
+@media (max-width: 640px) {
+  .whatsapp-float {
+    width: 48px;
+    height: 48px;
+    bottom: 18px;
+    right: 18px;
+  }
+  .whatsapp-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
