@@ -201,6 +201,20 @@ const HomePage = () => {
         <p className="footer-note">Operations hub: Switzerland</p>
         <p className="footer-note">info@swiss-starter.ch</p>
       </footer>
+      {/* Floating WhatsApp Button */}
+      <a
+          href="https://wa.me/417912345678?text=Hello%20from%20Newlink%20Exchange%20Switzerland"
+          className="whatsapp-float"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Chat with us on WhatsApp"
+      >
+      <img
+          src="/images/whatsapp-icon.svg"
+          alt="WhatsApp"
+          className="whatsapp-icon"
+       />
+    </a>    
     </div>
   );
 };
